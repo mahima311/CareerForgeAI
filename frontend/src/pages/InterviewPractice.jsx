@@ -21,6 +21,8 @@ import {
 import interviewQuestions from "../data/interviewQuestions";
 import "./InterviewPractice.css";
 
+const API_URL = (import.meta.env.VITE_API_URL || "").replace(/\/+$/, "");
+
 function InterviewPractice() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -67,12 +69,17 @@ function InterviewPractice() {
         return;
       }
 
+      if (!API_URL) {
+        setEvaluationError("API URL is not configured. Please try again later.");
+        return;
+      }
+
       setEvaluating(true);
       setEvaluationError("");
 
       try {
         const response = await fetch(
-          "http://localhost:5000/api/career/evaluate-interview",
+          `${API_URL}/api/career/evaluate-interview`,
           {
             method: "POST",
             headers: {

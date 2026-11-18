@@ -21,6 +21,8 @@ import {
 
 import "./SavedCareerPlans.css";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function SavedCareerPlans() {
   const navigate = useNavigate();
 
@@ -45,7 +47,7 @@ function SavedCareerPlans() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/career-plans",
+        `${API_URL}/api/career-plans`,
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -88,7 +90,7 @@ function SavedCareerPlans() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/career-plans/${planId}/roadmap/${stepIndex}`,
+        `${API_URL}/api/career-plans/${planId}/roadmap/${stepIndex}`,
         {
           method: "PATCH",
           headers: {
@@ -143,7 +145,7 @@ function SavedCareerPlans() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/career-plans/${planId}`,
+        `${API_URL}/api/career-plans/${planId}`,
         {
           method: "DELETE",
           headers: {

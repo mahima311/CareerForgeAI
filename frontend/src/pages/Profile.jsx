@@ -1,8 +1,18 @@
 
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { User, Mail, GraduationCap, Code, Heart, ArrowLeft, Save } from "lucide-react";
+import {
+  User,
+  Mail,
+  GraduationCap,
+  Code,
+  Heart,
+  ArrowLeft,
+  Save
+} from "lucide-react";
 import "./Profile.css";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Profile() {
   const navigate = useNavigate();
@@ -28,7 +38,7 @@ function Profile() {
       }
 
       try {
-        const response = await fetch("http://localhost:5000/api/profile", {
+        const response = await fetch(`${API_URL}/api/profile`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -73,7 +83,7 @@ function Profile() {
     try {
       setMessage("");
 
-      const response = await fetch("http://localhost:5000/api/profile", {
+      const response = await fetch(`${API_URL}/api/profile`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -82,8 +92,14 @@ function Profile() {
         body: JSON.stringify({
           name: formData.name,
           qualification: formData.qualification,
-          skills: formData.skills.split(",").map(item => item.trim()).filter(Boolean),
-          interests: formData.interests.split(",").map(item => item.trim()).filter(Boolean)
+          skills: formData.skills
+            .split(",")
+            .map(item => item.trim())
+            .filter(Boolean),
+          interests: formData.interests
+            .split(",")
+            .map(item => item.trim())
+            .filter(Boolean)
         })
       });
 

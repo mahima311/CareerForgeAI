@@ -20,7 +20,7 @@ import {
 
 import "./JobOpportunities.css";
 
-const API_URL = "http://localhost:5000/api/jobs";
+const API_URL = `${(import.meta.env.VITE_API_URL || "").replace(/\/+$/, "")}/api/jobs`;
 const SAVED_JOBS_KEY = "careerforge_saved_jobs";
 
 // Normalize different API job type values into one standard value.

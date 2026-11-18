@@ -22,6 +22,8 @@ import {
 
 import "./Dashboard.css";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function Dashboard() {
   const navigate = useNavigate();
 
@@ -63,7 +65,7 @@ function Dashboard() {
 
       try {
         const response = await fetch(
-          "http://localhost:5000/api/career-plans",
+          `${API_URL}/api/career-plans`,
           {
             headers: {
               Authorization: `Bearer ${token}`

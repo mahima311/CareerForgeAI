@@ -22,7 +22,7 @@ import {
 
 import "./CareerGuidance.css";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_URL = (import.meta.env.VITE_API_URL || "").replace(/\/+$/, "");
 
 function CareerGuidance() {
   const navigate = useNavigate();
@@ -56,6 +56,11 @@ function CareerGuidance() {
 
     if (!token) {
       navigate("/login");
+      return;
+    }
+
+    if (!API_URL) {
+      setError("API URL is not configured. Please try again later.");
       return;
     }
 
@@ -129,6 +134,11 @@ function CareerGuidance() {
 
     if (!token) {
       navigate("/login");
+      return;
+    }
+
+    if (!API_URL) {
+      setSaveMessage("API URL is not configured. Please try again later.");
       return;
     }
 
