@@ -22,6 +22,8 @@ import {
 
 import "./CareerGuidance.css";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 function CareerGuidance() {
   const navigate = useNavigate();
 
@@ -65,7 +67,7 @@ function CareerGuidance() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/career/recommend",
+        `${API_URL}/api/career/recommend`,
         {
           method: "POST",
           headers: {
@@ -90,13 +92,14 @@ function CareerGuidance() {
       }
 
       setRecommendations(data.recommendations);
+
       setAnalyzedQualification(
         data.qualification || formData.qualification
       );
 
-      // Fetch already saved plans
+      // Fetch already saved career plans
       const savedResponse = await fetch(
-        "http://localhost:5000/api/career-plans",
+        `${API_URL}/api/career-plans`,
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -140,7 +143,7 @@ function CareerGuidance() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/career-plans",
+        `${API_URL}/api/career-plans`,
         {
           method: "POST",
           headers: {
